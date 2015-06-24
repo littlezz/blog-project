@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load blog_tags %}
+
+{% block title %}
+    {{ category|default_if_none:"blog list" }}
+{% endblock %}
+
+{% block nav %}
+<div>
+    <p>
+        <span><a href="{% url 'blog_list_all' specie %}">all</a> </span>
+        {% for c in categories %}
+            <span><a href="{% url 'blog_list_by_category' specie c.slug %}">{{ c }}</a> </span>
+            <a href="{{ c.get_absolute_url }}">fuck</a>
+        {% endfor %}
+    </p>
+</div>
+
+
+
+{% endblock %}
+{% block main %}
+<div class="container">
+
+    <div class="col-md-offset-1 col-md-10">
+    {% block content %}
+    {% for blog in blog_list %}
+        <a href="{{ blog.get_absolute_url }}"><h3>{{ blog.title }}</h3></a>
+        <p>posted {{ blog.update_time|timesince }}</p>
+        <p>{{ blog.description|default:blog.auto_description|markdown_render|safe }}</p>
+        {% block tags %}
+            {% with blog.tags.all as blog_tags %}
+            {% if blog_tags %}
+                Keywords:
+                {% for t in blog_tags %}
+                    <span><a href="{% url 'blog_list_by_tag' specie t.slug %}" class="tag"> {{ t }}</a> </span>
+
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+        {% endblock %}
+        <hr>
+    {% endfor %}
+
+{% include 'includes/render_pages.html' %}
+{#        {% bootstrap_pagination page_obj %}#}
+{% endblock content %}
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+
+

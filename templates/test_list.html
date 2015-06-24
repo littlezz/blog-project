@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    ?
+    {% for i in images %}
+        <p>{{ i.title }}</p>
+        <img src="{{ i.image.url }}">
+    {% endfor %}
+{% endblock %}
