@@ -1,0 +1,16 @@
+{% extends 'code_post/blog_list.html' %}
+{% load blog_tags %}
+
+{% block title%}
+    {{ blog.title|title }}
+{% endblock %}
+
+{% block content %}
+    <h2>{{ blog.title }}</h2>
+    {{ blog.update_time }}
+    <hr>
+    {{ blog.content|safe }}
+    {% block tags %}
+         {{ block.super }}
+    {% endblock %}
+{% endblock %}

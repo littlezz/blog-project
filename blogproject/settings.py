@@ -43,6 +43,10 @@ INSTALLED_APPS = (
     'django_markdown',
     "bootstrap3",
     'gallry',
+    'code_post',
+    # 'ckeditor',
+    # 'tinymce',
+    'redactor',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -107,6 +111,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = ['local_static']
+STATIC_ROOT = 'static'
 
 
 TEMPLATE_DIRS = (
@@ -116,3 +121,6 @@ TEMPLATE_DIRS = (
 
 MEDIA_ROOT = 'media/'
 MEDIA_URL = '/media/'
+
+
+CKEDITOR_UPLOAD_PATH = "uploads/"

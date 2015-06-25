@@ -20,6 +20,7 @@ class Displayable(models.Model):
 
 
 
+
 class Slugged(models.Model):
     title = models.CharField(max_length=100)
     slug = models.CharField(max_length=200, blank=True)
@@ -56,6 +57,7 @@ class Slugged(models.Model):
 
 
 class AbstractTag(Slugged):
+    name_space = None
     class Meta:
         abstract = True
 
@@ -63,10 +65,11 @@ class AbstractTag(Slugged):
         kwargs = {
             'tag_slug': self.slug
         }
-        return reverse('blog_list_by_tag', kwargs=kwargs)
+        return reverse(':'.join((self.name_space, 'blog_list_by_tag')), kwargs=kwargs)
 
 
 class AbstractCategory(Slugged):
+    name_space = None
     class Meta:
         abstract = True
 
@@ -74,7 +77,7 @@ class AbstractCategory(Slugged):
         kwargs = {
             'category_slug': self.slug
         }
-        return reverse('blog_list_by_category', kwargs=kwargs)
+        return reverse(':'.join((self.name_space, 'blog_list_by_category')), kwargs=kwargs)
 
 
 
@@ -83,6 +86,8 @@ class BaseBlogPost(Displayable, Slugged):
     category = models.ForeignKey("Category", blank=True, null=True, on_delete=models.SET_NULL, related_name='blog_posts')
     custom_description = models.CharField(max_length=255, blank=True)
     auto_description = models.CharField(max_length=255, blank=True)
+    feature_image = models.ImageField(blank=True, null=True)
+    name_space = None
 
     class Meta:
         ordering = ['-update_time']
@@ -103,7 +108,7 @@ class BaseBlogPost(Displayable, Slugged):
             'slug': self.slug,
 
         }
-        return reverse('blog_post_detail', kwargs=kwargs)
+        return reverse(self.name_space + ':' + 'blog_post_detail', kwargs=kwargs)
 
     # def get_absolute_url(self):
     #     """must rewrite in subclass

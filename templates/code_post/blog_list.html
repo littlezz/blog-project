@@ -9,7 +9,7 @@
 {% block nav %}
 <div>
     <p>
-        <span><a href="{% url 'blog:blog_list_all' %}">all</a> </span>
+        <span><a href="{% url 'code:blog_list_all' %}">all</a> </span>
         {% for c in categories %}
             <span><a href="{{ c.get_absolute_url }}">{{ c }}</a> </span>
         {% endfor %}
@@ -22,16 +22,12 @@
 {% block main %}
 <div class="container">
 
-    <div class="col-md-offset-1 col-md-10 text-center">
+    <div class="col-md-offset-1 col-md-10">
     {% block content %}
     {% for blog in blog_list %}
-        <div>
         <a href="{{ blog.get_absolute_url }}"><h3>{{ blog.title }}</h3></a>
         <p>posted {{ blog.update_time|timesince }}</p>
-        {% if blog.feature_image %}
-            <img src="{{ blog.feature_image.url }}">
-        {% endif %}
-        <p>{{ blog.description|default:blog.auto_description|markdown_render|safe }}</p>
+        <p>{{ blog.description|default:blog.auto_description|safe }}</p>
         {% block tags %}
             {% with blog.tags.all as blog_tags %}
             {% if blog_tags %}
@@ -44,8 +40,6 @@
             {% endwith %}
         {% endblock %}
         <hr>
-        </div>
-
     {% endfor %}
 
 {% include 'includes/render_pages.html' %}

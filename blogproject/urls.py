@@ -20,14 +20,18 @@ from django.views.generic import TemplateView
 from gallry import urls as gallry_urls
 from django.conf import settings
 from django.conf.urls.static import static
+from code_post import urls as code_urls
 
 urlpatterns = [
     url('^markdown/', include( 'django_markdown.urls')),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^blog/', include(blog_urls )),
+    url(r'^blog/', include(blog_urls, namespace='blog')),
+    url(r'^code/', include(code_urls, namespace='code')),
     url(r'^$', TemplateView.as_view(template_name='welcome.html')),
     url(r'^images/', include(gallry_urls)),
-
+    # url(r'^ckeditor/', include('ckeditor.urls')),
+    # url(r'^tinymce/', include('tinymce.urls')),
+    url(r'^redactor/', include('redactor.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

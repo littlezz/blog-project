@@ -17,19 +17,30 @@
     <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="{% static 'nprogress.js' %}"></script>
     <link rel="stylesheet" href="{% static 'nprogress.css' %}">
+    <link rel="stylesheet" href="{% static 'core.css' %}">
 </head>
 
+
+<body>
 <script>
     $(window).bind('load',NProgress.done);
     NProgress.start();
 
 
 </script>
-<body>
+
 {% block nav %}
 {% endblock %}
 {% block main %}
 {% endblock %}
 
+<footer class="grey light">
+    <div class="container footer">
+
+        <p>浙江大学企业俱乐部联合会百度俱乐部</p>
+        <p>Copyright © 2014 ZJU <a href="http://baiduzju.org">Baidu Club</a>. All Rights Reserved</p>
+
+    </div>
+</footer>
 </body>
 </html>

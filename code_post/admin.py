@@ -1,7 +1,7 @@
 from django.contrib import admin
 from . import models
-from core.admin import PostAdmin, SlugAdmin
 # Register your models here.
+from core.admin import PostAdmin, SlugAdmin
 
 
 @admin.register(models.BlogPost)
