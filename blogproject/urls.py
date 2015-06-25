@@ -25,7 +25,7 @@ urlpatterns = [
     url('^markdown/', include( 'django_markdown.urls')),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^(?P<specie>(blog|code))/', include(blog_urls )),
+    url(r'^blog/', include(blog_urls )),
     url(r'^$', TemplateView.as_view(template_name='welcome.html')),
     url(r'^images/', include(gallry_urls)),
 

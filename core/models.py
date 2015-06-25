@@ -18,10 +18,6 @@ class Displayable(models.Model):
     class Meta:
         abstract = True
 
-    def save(self, *args, **kwargs):
-        if self.publish_date == None:
-            self.publish_date = timezone.now()
-        super().save()
 
 
 class Slugged(models.Model):
@@ -65,7 +61,7 @@ class AbstractTag(Slugged):
 
     def get_absolute_url(self):
         kwargs = {
-            'tag': self.slug
+            'tag_slug': self.slug
         }
         return reverse('blog_list_by_tag', kwargs=kwargs)
 
@@ -76,7 +72,7 @@ class AbstractCategory(Slugged):
 
     def get_absolute_url(self):
         kwargs = {
-            'category': self.slug
+            'category_slug': self.slug
         }
         return reverse('blog_list_by_category', kwargs=kwargs)
 

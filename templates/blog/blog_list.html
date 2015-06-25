@@ -9,10 +9,9 @@
 {% block nav %}
 <div>
     <p>
-        <span><a href="{% url 'blog_list_all' specie %}">all</a> </span>
+        <span><a href="{% url 'blog_list_all' %}">all</a> </span>
         {% for c in categories %}
-            <span><a href="{% url 'blog_list_by_category' specie c.slug %}">{{ c }}</a> </span>
-            <a href="{{ c.get_absolute_url }}">fuck</a>
+            <span><a href="{{ c.get_absolute_url }}">{{ c }}</a> </span>
         {% endfor %}
     </p>
 </div>
