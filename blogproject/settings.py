@@ -44,8 +44,6 @@ INSTALLED_APPS = (
     "bootstrap3",
     'gallry',
     'code_post',
-    # 'ckeditor',
-    # 'tinymce',
     'redactor',
 )
 
