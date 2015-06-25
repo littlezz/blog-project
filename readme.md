@@ -22,3 +22,4 @@ Requirements
 - bleach
 - grappelli
 - django-wysiwyg-redactor
+- slugify
