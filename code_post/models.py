@@ -15,5 +15,6 @@ class Category(NameSpaceMixin, AbstractCategory):
 class Tag(NameSpaceMixin, AbstractTag):
     pass
 
+
 class BlogPost(NameSpaceMixin, BaseBlogPost):
     content = MarkdownField()

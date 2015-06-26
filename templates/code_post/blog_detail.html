@@ -1,16 +1,20 @@
-{% extends 'code_post/blog_list.html' %}
+{% extends 'blog/blog_detail.html' %}
 {% load blog_tags %}
 
-{% block title%}
-    {{ blog.title|title }}
-{% endblock %}
+{#{% block title%}#}
+{#    {{ blog.title|title }}#}
+{#{% endblock %}#}
+{##}
+{#{% block content %}#}
+{#    <h2>{{ blog.title }}</h2>#}
+{#    {{ blog.update_time }}#}
+{#    <hr>#}
+{#    {{ blog.content|markdown_render|safe }}#}
+{#    {% block tags %}#}
+{#         {{ block.super }}#}
+{#    {% endblock %}#}
+{#{% endblock %}#}
 
-{% block content %}
-    <h2>{{ blog.title }}</h2>
-    {{ blog.update_time }}
-    <hr>
-    {{ blog.content|safe }}
-    {% block tags %}
-         {{ block.super }}
-    {% endblock %}
+{% block article %}
+    {{ blog.content|markdown_render|safe }}
 {% endblock %}

@@ -6,10 +6,15 @@
 {% endblock %}
 
 {% block content %}
+    {% block feature_image %}
+        {{ block.super }}
+    {% endblock %}
     <h2>{{ blog.title }}</h2>
     {{ blog.update_time }}
     <hr>
-    {{ blog.content|markdown_render|safe }}
+    {% block article %}
+        {{ blog.content|safe }}
+    {% endblock %}
     {% block tags %}
          {{ block.super }}
     {% endblock %}

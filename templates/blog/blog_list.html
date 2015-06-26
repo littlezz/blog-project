@@ -28,10 +28,12 @@
         <div>
         <a href="{{ blog.get_absolute_url }}"><h3>{{ blog.title }}</h3></a>
         <p>posted {{ blog.update_time|timesince }}</p>
-        {% if blog.feature_image %}
-            <img src="{{ blog.feature_image.url }}">
-        {% endif %}
-        <p>{{ blog.description|default:blog.auto_description|markdown_render|safe }}</p>
+        {% block feature_image %}
+            {% if blog.feature_image %}
+                <img src="{{ blog.feature_image.url }}">
+            {% endif %}
+        {% endblock %}
+        <p>{{ blog.description|default:blog.auto_description|safe }}</p>
         {% block tags %}
             {% with blog.tags.all as blog_tags %}
             {% if blog_tags %}

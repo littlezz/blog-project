@@ -27,7 +27,7 @@
     {% for blog in blog_list %}
         <a href="{{ blog.get_absolute_url }}"><h3>{{ blog.title }}</h3></a>
         <p>posted {{ blog.update_time|timesince }}</p>
-        <p>{{ blog.description|default:blog.auto_description|safe }}</p>
+        <p>{{ blog.description|default:blog.auto_description|markdown_render|safe }}</p>
         {% block tags %}
             {% with blog.tags.all as blog_tags %}
             {% if blog_tags %}
@@ -43,7 +43,6 @@
     {% endfor %}
 
 {% include 'includes/render_pages.html' %}
-{#        {% bootstrap_pagination page_obj %}#}
 {% endblock content %}
 
     </div>

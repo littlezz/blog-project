@@ -1,9 +1,9 @@
 from django.db.models import TextField
-from markdown2 import markdown
 from django_markdown.widgets import MarkdownWidget
-from ckeditor.widgets import CKEditorWidget
-# from tinymce.widgets import AdminTinyMCE
 from redactor.widgets import RedactorEditor
+from core import default_settings as settings
+from bleach import clean
+
 __author__ = 'zz'
 
 
@@ -18,3 +18,11 @@ class RichTextField(TextField):
     def formfield(self, **kwargs):
         kwargs['widget'] = RedactorEditor
         return super().formfield(**kwargs)
+
+    def to_python(self, value):
+        return clean(value,
+                     tags=settings.ALLOW_TAGS,
+                     attributes=settings.ALLOW_ATTRS,
+                     styles=settings.ALLOW_STYLES
+                     )
+
