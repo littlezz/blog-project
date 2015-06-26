@@ -1,5 +1,5 @@
 from core.models import AbstractCategory, AbstractTag, BaseBlogPost
-from core.fields import RichTextField
+from core.fields import MarkdownField
 
 
 
@@ -16,4 +16,4 @@ class Tag(NameSpaceMixin, AbstractTag):
     pass
 
 class BlogPost(NameSpaceMixin, BaseBlogPost):
-    content = RichTextField()
+    content = MarkdownField()

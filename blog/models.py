@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 from core.models import AbstractCategory, AbstractTag, BaseBlogPost
-from core.fields import MarkdownField
+from core.fields import RichTextField
 
 
 
@@ -20,5 +20,5 @@ class Tag(NameSpaceMixin, AbstractTag):
 
 
 class BlogPost(NameSpaceMixin, BaseBlogPost):
-    content = MarkdownField()
+    content = RichTextField()
 
