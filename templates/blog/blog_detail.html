@@ -10,10 +10,11 @@
         {{ block.super }}
     {% endblock %}
     <h2>{{ blog.title }}</h2>
-    {{ blog.update_time }}
+    {{ blog.update_time|date }}
     <hr>
     {% block article %}
         {{ blog.content|safe }}
+        {% lorem 5 p %}
     {% endblock %}
     {% block tags %}
          {{ block.super }}

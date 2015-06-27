@@ -95,7 +95,7 @@ class BaseBlogPost(Displayable, Slugged):
         abstract = True
 
     def save(self, *args, **kwargs):
-        self.auto_description = self.content[:100]
+        self.auto_description = self.content[:200]
 
         super().save(*args, **kwargs)
 

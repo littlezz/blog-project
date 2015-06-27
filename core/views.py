@@ -10,6 +10,8 @@ class BaseGetContextMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['categories'] = self.category.objects.all()
+        context['category'] = self.kwargs.get('category_slug')
+        context['tag'] = self.kwargs.get('tag')
         return context
 
 
