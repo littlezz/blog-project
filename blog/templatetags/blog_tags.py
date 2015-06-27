@@ -15,7 +15,7 @@ HTML_ClASSES = {
 @register.filter
 def markdown_render(value):
     extras = {
-            'fenced-code-blocks': True,
+            'fenced-code-blocks': {},
             'html-classes': HTML_ClASSES,
     }
     return clean(markdown(value, extras=extras),

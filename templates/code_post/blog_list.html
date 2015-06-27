@@ -8,26 +8,71 @@
 
 {% block nav %}
 <div>
-    <p>
-        <span><a href="{% url 'code:blog_list_all' %}">all</a> </span>
-        {% for c in categories %}
-            <span><a href="{{ c.get_absolute_url }}">{{ c }}</a> </span>
-        {% endfor %}
-    </p>
-</div>
+{#    <p>#}
+{#        <span><a href="{% url 'blog:blog_list_all' %}">all</a> </span>#}
+{#        {% for c in categories %}#}
+{#            <span><a href="{{ c.get_absolute_url }}">{{ c }}</a> </span>#}
+{#        {% endfor %}#}
+{#    </p>#}
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">littlezz</a>
+    </div>
 
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav text-center">
+            {% if not category %}
+                <li class="active"><a href="{% url 'code:blog_list_all' %}">ALL<span class="sr-only">(current)</span></a></li>
+              {% else %}
+                <li><a href="{% url 'code:blog_list_all' %}">ALL</a></li>
+              {% endif %}
+
+          {% for c in categories  %}
+              {% if c.slug == category %}
+                <li class="active"><a href="{{ c.get_absolute_url }}">{{ c.title }} <span class="sr-only">(current)</span></a></li>
+              {% else %}
+                <li><a href="{{ c.get_absolute_url }}">{{ c.title }}</a></li>
+              {% endif %}
+          {% endfor %}
+
+      </ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+</div>
 
 
 {% endblock %}
 {% block main %}
 <div class="container">
 
-    <div class="col-md-offset-1 col-md-10">
+    <div class="col-md-offset-1 col-md-10 page-header">
+
     {% block content %}
     {% for blog in blog_list %}
-        <a href="{{ blog.get_absolute_url }}"><h3>{{ blog.title }}</h3></a>
-        <p>posted {{ blog.update_time|timesince }}</p>
-        <p>{{ blog.description|default:blog.auto_description|markdown_render|safe }}</p>
+        {% block per_blog %}
+        {% block blog_title %}
+            <a href="{{ blog.get_absolute_url }}" class="blog-click-title"><h1 class="text-center">{{ blog.title }}</h1></a>
+        {% endblock %}
+        <p class="text-center blog-sub-info">
+            {{ blog.publish_date|date:"Y-m-d" }}
+            /
+            <a href="{{ blog.category.get_absolute_url }}">{{ blog.category.title }}</a>
+        </p>
+        {% block article %}
+            {{ blog.custom_description|default:blog.content|markdown_render|truncatewords_html:100|safe }}
+            {% lorem 3 p %}
+        {% endblock %}
         {% block tags %}
             {% with blog.tags.all as blog_tags %}
             {% if blog_tags %}
@@ -39,6 +84,7 @@
             {% endif %}
             {% endwith %}
         {% endblock %}
+        {% endblock per_blog %}
         <hr>
     {% endfor %}
 

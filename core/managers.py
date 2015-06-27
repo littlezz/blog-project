@@ -9,7 +9,9 @@ class PublishManager(Manager):
         print('sdfdsfasfasfadsf!!!!!!!!!!!!!!!!!!!!!!!!!!')
         if for_user is not None and for_user.is_staff:
             return self.all()
-        # print('sdfdsfasfasfadsf!!!!!!!!!!!!!!!!!!!!!!!!!!')
+
+        # return self.all()
+
         return self.filter(
             Q(publish_date__lte=now())| Q(publish_date__isnull=True) ,
             Q(expire_date__gte=now()) | Q(expire_date__isnull=True),

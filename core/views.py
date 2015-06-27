@@ -14,16 +14,15 @@ class BaseGetContextMixin:
         context['tag'] = self.kwargs.get('tag')
         return context
 
-
-class BaseBlogListView(ListView):
-    context_object_name = 'blog_list'
-    paginate_by = 5
-
+class GetQuerysetMixin:
     def get_queryset(self):
+        if not self.model:
+            raise NotImplemented('Must set model')
+
         category_slug =  self.kwargs.get('category_slug')
         tag = self.kwargs.get('tag')
 
-        queryset = self.queryset
+        queryset = self.model.objects.publish()
 
         if category_slug:
             queryset = queryset.filter(category__slug=category_slug)
@@ -36,6 +35,14 @@ class BaseBlogListView(ListView):
 
 
 
+class BaseBlogListView(GetQuerysetMixin, ListView):
+    context_object_name = 'blog_list'
+    paginate_by = 5
 
-class BaseBlogDetailView(DetailView):
+
+
+
+
+
+class BaseBlogDetailView(GetQuerysetMixin, DetailView):
     context_object_name = 'blog'

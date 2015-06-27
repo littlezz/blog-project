@@ -7,7 +7,6 @@ class GetContextMixin(BaseGetContextMixin):
 
 
 class BlogListView(GetContextMixin, BaseBlogListView):
-    queryset = BlogPost.objects.publish()
     model = BlogPost
     template_name = 'code_post/blog_list.html'
 
@@ -16,5 +15,5 @@ class BlogListView(GetContextMixin, BaseBlogListView):
 
 
 class BlogDetailView(GetContextMixin, BaseBlogDetailView):
-    queryset = BlogPost.objects.publish()
+    model = BlogPost
     template_name = 'code_post/blog_detail.html'

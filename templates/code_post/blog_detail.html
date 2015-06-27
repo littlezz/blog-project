@@ -1,4 +1,4 @@
-{% extends 'blog/blog_detail.html' %}
+{% extends 'code_post/blog_list.html' %}
 {% load blog_tags %}
 
 {#{% block title%}#}
@@ -15,6 +15,12 @@
 {#    {% endblock %}#}
 {#{% endblock %}#}
 
-{% block article %}
-    {{ blog.content|markdown_render|safe }}
+{#{% block article %}#}
+{#    {{ blog.content|markdown_render|safe }}#}
+{#{% endblock %}#}
+
+{% block content %}
+{% block per_blog %}
+    {{ block.super }}
+{% endblock %}
 {% endblock %}
