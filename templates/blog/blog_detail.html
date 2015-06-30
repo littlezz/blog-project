@@ -1,5 +1,4 @@
 {% extends 'blog/blog_list.html' %}
-{% load blog_tags %}
 
 {% block title%}
     {{ blog.title|title }}
@@ -13,7 +12,7 @@
     {{ blog.update_time|date }}
     <hr>
     {% block article %}
-        {{ blog.content|safe }}
+        {{ blog.rendered_content|safe }}
         {% lorem 5 p %}
     {% endblock %}
     {% block tags %}

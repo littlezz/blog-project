@@ -4,6 +4,7 @@ from django.utils import timezone
 from slugify import slugify
 from django.core.urlresolvers import reverse
 from .managers import PublishManager
+from django.utils.text import Truncator
 
 
 
@@ -88,9 +89,10 @@ class BaseBlogPost(Displayable, Slugged):
     tags = models.ManyToManyField("Tag", blank=True)
     category = models.ForeignKey("Category", blank=True, null=True, on_delete=models.SET_NULL, related_name='blog_posts')
     custom_description = models.CharField(max_length=255, blank=True)
-    auto_description = models.CharField(max_length=255, blank=True)
+    auto_description = models.TextField(blank=True)
     feature_image = models.ImageField(blank=True, null=True)
     name_space = None
+    description_trunc_num = 300
 
     class Meta:
         ordering = ['-update_time']
@@ -98,13 +100,25 @@ class BaseBlogPost(Displayable, Slugged):
         abstract = True
 
     def save(self, *args, **kwargs):
-        self.auto_description = self.content[:200]
-
+        self.auto_description = self.generate_auto_description()
         super().save(*args, **kwargs)
 
     @property
     def description(self):
-        return self.custom_description or self.auto_description
+        return self.custom_description or self.auto_description()
+
+
+
+    def rendered_content(self):
+        """
+        must rewrite when use markdown content field.
+        """
+        return self.content
+
+    def generate_auto_description(self):
+        content = self.rendered_content()
+
+        return Truncator(content).words(self.description_trunc_num, html=True, truncate=' ...')
 
     def get_absolute_url(self):
         kwargs = {

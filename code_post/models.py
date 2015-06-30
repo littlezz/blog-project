@@ -1,6 +1,6 @@
 from core.models import AbstractCategory, AbstractTag, BaseBlogPost
 from core.fields import MarkdownField
-
+from core.utils import markdown_render
 
 
 
@@ -18,3 +18,6 @@ class Tag(NameSpaceMixin, AbstractTag):
 
 class BlogPost(NameSpaceMixin, BaseBlogPost):
     content = MarkdownField()
+
+    def rendered_content(self):
+        return markdown_render(self.content)

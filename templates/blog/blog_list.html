@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load bootstrap3 %}
-{% load blog_tags %}
 
 {% block title %}
     {{ category|default_if_none:"blog list" }}
@@ -65,7 +64,7 @@
                 <img src="{{ blog.feature_image.url }}">
             {% endif %}
         {% endblock %}
-        <p>{{ blog.description|default:blog.auto_description|truncatewords_html:100|safe }}</p>
+        <p>{{ blog.description|safe }}</p>
         {% block tags %}
             {% with blog.tags.all as blog_tags %}
             {% if blog_tags %}

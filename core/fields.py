@@ -8,6 +8,8 @@ __author__ = 'zz'
 
 
 class MarkdownField(TextField):
+    """ 不需要在存入的时候过滤， 过滤函数会滤掉'>'字符。
+    """
 
     def formfield(self, **kwargs):
         kwargs['widget'] = MarkdownWidget
@@ -19,7 +21,7 @@ class RichTextField(TextField):
         kwargs['widget'] = RedactorEditor
         return super().formfield(**kwargs)
 
-    def to_python(self, value):
+    def get_prep_value(self, value):
         return clean(value,
                      tags=settings.ALLOW_TAGS,
                      attributes=settings.ALLOW_ATTRS,

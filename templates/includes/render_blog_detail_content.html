@@ -1,0 +1,5 @@
+{% extends 'includes/render_blog_list_content.html' %}
+
+{% block article %}
+    {{ blog.rendered_content|safe }}
+{% endblock %}
