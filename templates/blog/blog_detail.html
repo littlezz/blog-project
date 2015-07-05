@@ -1,21 +1,5 @@
 {% extends 'blog/blog_list.html' %}
 
-{% block title%}
-    {{ blog.title|title }}
-{% endblock %}
-
 {% block content %}
-    {% block feature_image %}
-        {{ block.super }}
-    {% endblock %}
-    <h2>{{ blog.title }}</h2>
-    {{ blog.update_time|date }}
-    <hr>
-    {% block article %}
-        {{ blog.rendered_content|safe }}
-        {% lorem 5 p %}
-    {% endblock %}
-    {% block tags %}
-         {{ block.super }}
-    {% endblock %}
+    {% include 'includes/render_blog_detail_content.html' %}
 {% endblock %}

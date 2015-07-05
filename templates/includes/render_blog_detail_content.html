@@ -1,5 +1,14 @@
 {% extends 'includes/render_blog_list_content.html' %}
 
+{% block feature_image_top %}
+
+    {% if blog.feature_image %}
+        <img src="{{ blog.feature_image.url }}">
+    {% endif %}
+{% endblock %}
+
+
+
 {% block article %}
     {{ blog.rendered_content|safe }}
 {% endblock %}

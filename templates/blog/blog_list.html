@@ -56,33 +56,18 @@
     <div class="col-md-offset-1 col-md-10 text-center">
     {% block content %}
     {% for blog in blog_list %}
-        <div>
-        <a href="{{ blog.get_absolute_url }}"><h3>{{ blog.title }}</h3></a>
-        <p>posted {{ blog.update_time|timesince }}</p>
-        {% block feature_image %}
-            {% if blog.feature_image %}
-                <img src="{{ blog.feature_image.url }}">
-            {% endif %}
-        {% endblock %}
-        <p>{{ blog.description|safe }}</p>
-        {% block tags %}
-            {% with blog.tags.all as blog_tags %}
-            {% if blog_tags %}
-                Keywords:
-                {% for t in blog_tags %}
-                    <span><a href="{% url 'blog_list_by_tag' specie t.slug %}" class="tag"> {{ t }}</a> </span>
-
-                {% endfor %}
-            {% endif %}
-            {% endwith %}
-        {% endblock %}
-        <hr>
+        <div class="list-background" style="background-image: {% if blog.feature_image %}
+            url({{ blog.feature_image.url }})
+        {% endif %}" >
+            {% include 'includes/render_blog_list_content.html' %}
         </div>
+        {% if not forloop.last %}
+            <hr>
+        {% endif %}
 
     {% endfor %}
 
 {% include 'includes/render_pages.html' %}
-{#        {% bootstrap_pagination page_obj %}#}
 {% endblock content %}
 
     </div>

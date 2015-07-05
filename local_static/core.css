@@ -18,3 +18,11 @@ a.blog-click-title {
 a.blog-click-title:hover{
     text-decoration: None;
 }
+
+.list-background {
+    background-size: cover;
+
+    /*background-repeat: no-repeat;*/
+    background-color: transparent;
+
+}

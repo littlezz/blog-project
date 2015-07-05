@@ -67,7 +67,7 @@ class AbstractTag(Slugged):
 
     def get_absolute_url(self):
         kwargs = {
-            'tag_slug': self.slug
+            'tag': self.slug
         }
         return reverse(':'.join((self.name_space, 'blog_list_by_tag')), kwargs=kwargs)
 
@@ -112,10 +112,14 @@ class BaseBlogPost(Displayable, Slugged):
     def rendered_content(self):
         """
         must rewrite when use markdown content field.
+        输出渲染好的安全的带html tag的内容。
         """
         return self.content
 
     def generate_auto_description(self):
+        """
+        从渲染好的文本里面截取
+        """
         content = self.rendered_content()
 
         return Truncator(content).words(self.description_trunc_num, html=True, truncate=' ...')
@@ -127,7 +131,5 @@ class BaseBlogPost(Displayable, Slugged):
         }
         return reverse(self.name_space + ':' + 'blog_post_detail', kwargs=kwargs)
 
-    # def get_absolute_url(self):
-    #     """must rewrite in subclass
-    #     """
-    #     raise NotImplemented
+
+

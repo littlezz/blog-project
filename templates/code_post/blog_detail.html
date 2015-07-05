@@ -1,23 +1,5 @@
 {% extends 'code_post/blog_list.html' %}
 
-{#{% block title%}#}
-{#    {{ blog.title|title }}#}
-{#{% endblock %}#}
-{##}
-{#{% block content %}#}
-{#    <h2>{{ blog.title }}</h2>#}
-{#    {{ blog.update_time }}#}
-{#    <hr>#}
-{#    {{ blog.content|markdown_render|safe }}#}
-{#    {% block tags %}#}
-{#         {{ block.super }}#}
-{#    {% endblock %}#}
-{#{% endblock %}#}
-
-{#{% block article %}#}
-{#    {{ blog.content|markdown_render|safe }}#}
-{#{% endblock %}#}
-
 {% block content %}
     {% include 'includes/render_blog_detail_content.html'%}
 {% endblock %}
