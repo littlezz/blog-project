@@ -105,7 +105,7 @@ class BaseBlogPost(Displayable, Slugged):
 
     @property
     def description(self):
-        return self.custom_description or self.auto_description()
+        return self.custom_description or self.auto_description
 
 
 
