@@ -71,6 +71,10 @@ class AbstractTag(Slugged):
         }
         return reverse(':'.join((self.name_space, 'blog_list_by_tag')), kwargs=kwargs)
 
+    @staticmethod
+    def autocomplete_search_fields():
+        return ("id__iexact", "title__icontains",)
+
 
 class AbstractCategory(Slugged):
     name_space = None
