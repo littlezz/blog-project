@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'gallry',
     'code_post',
     'redactor',
+    'comment'
 )
 
 MIDDLEWARE_CLASSES = (

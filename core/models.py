@@ -7,12 +7,18 @@ from .managers import PublishManager
 from django.utils.text import Truncator
 
 
-
-class Displayable(models.Model):
+class TimeStamp(models.Model):
     create_time = models.DateTimeField(auto_now_add=True)
+    update_time = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+
+
+
+class Displayable(TimeStamp):
     publish_date = models.DateTimeField(blank=True, null=True)
     expire_date = models.DateTimeField(blank=True, null=True)
-    update_time = models.DateTimeField(auto_now=True)
 
     objects = PublishManager()
 
