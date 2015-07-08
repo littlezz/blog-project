@@ -26,3 +26,7 @@ a.blog-click-title:hover{
     background-color: transparent;
 
 }
+
+.comment-count {
+    padding: 5px;
+}

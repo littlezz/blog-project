@@ -1,4 +1,5 @@
 {% extends 'includes/render_blog_list_content.html' %}
+{% load comment_tag %}
 
 {% block feature_image_top %}
 
@@ -11,4 +12,8 @@
 
 {% block article %}
     {{ blog.rendered_content|safe }}
+{% endblock %}
+
+{% block comments %}
+    {% list_comments blog %}
 {% endblock %}

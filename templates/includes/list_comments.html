@@ -1,0 +1,13 @@
+<div>
+    <h3 class="comment-count"> {{ comments_count }} Comments</h3>
+
+    {% for comment in comments %}
+        <div class="panel panel-default text-left" id="comment{{ comment.id }}">
+            <div class="panel-heading">
+                <strong>{{ comment.username }}</strong> commented {{ comment.create_time|timesince }}
+            </div>
+            <div class="panel-body">{{ comment.content }}</div>
+        </div>
+
+    {% endfor %}
+</div>

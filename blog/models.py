@@ -23,3 +23,6 @@ class Tag(NameSpaceMixin, AbstractTag):
 class BlogPost(NameSpaceMixin, BaseBlogPost):
     content = RichTextField()
     comments = GenericRelation(Comment)
+
+    class Meta:
+        verbose_name = 'post of blog'
