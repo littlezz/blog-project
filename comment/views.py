@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import View
 from .forms import CommentForm
-from django.shortcuts import Http404
+from django.shortcuts import Http404, redirect
 from django.apps import apps
 # Create your views here.
 
@@ -23,4 +23,12 @@ class CommentView(View):
             raise Http404
 
         cf = CommentForm(target_object, request.POST)
+        if cf.is_valid():
+            comment = cf.save(commit=False)
+            comment.ip_address = request.META.get('REMOTE_ADDR')
+            comment.save()
 
+            return redirect(comment.get_absolute_url)
+
+        else:
+            raise Http404

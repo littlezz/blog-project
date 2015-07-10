@@ -33,3 +33,5 @@ class Comment(TimeStamp, UserInfo):
     def __str__(self):
         return '{}: {}'.format(self.username, self.content)
 
+    def get_absolute_url(self):
+        return self.content_object.get_absolute_url + '#comment{}'.format(self.id)
