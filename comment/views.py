@@ -28,7 +28,7 @@ class CommentView(View):
             comment.ip_address = request.META.get('REMOTE_ADDR')
             comment.save()
 
-            return redirect(comment.get_absolute_url)
+            return redirect(comment.get_absolute_url())
 
         else:
             raise Http404

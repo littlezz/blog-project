@@ -1,5 +1,6 @@
 from django import forms
 from .models import Comment
+from django.template.defaulttags import mark_safe
 __author__ = 'zz'
 
 
@@ -15,7 +16,12 @@ class CommentForm(forms.ModelForm):
 
     class Meta:
         model = Comment
-        fields = ('username', 'email', 'website', 'ip_address', 'content')
+        fields = ('username', 'email', 'website', 'content')
+        help_texts = {
+            '': 'ggsmd',
+            'username': '*',
+            'content': '*',
+        }
 
     def __init__(self, target_object, *args, **kwargs):
         self.target_object = target_object

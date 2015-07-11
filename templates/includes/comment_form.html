@@ -1,0 +1,12 @@
+{% load bootstrap3 %}
+
+<div>
+{#    TODO: add action url#}
+    <form action="{% url 'comment-post' %}" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form layout='horizontal'%}
+{#        {{ form.as_p }}#}
+        {% bootstrap_button 'submit' button_type="submit" %}
+    </form>
+
+</div>

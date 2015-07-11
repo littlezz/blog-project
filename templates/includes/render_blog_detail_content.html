@@ -11,9 +11,14 @@
 
 
 {% block article %}
-    {{ blog.rendered_content|safe }}
+    <div class="text-left">
+        {{ blog.rendered_content|safe }}
+        {% lorem 10 p %}
+    </div>
+
 {% endblock %}
 
 {% block comments %}
     {% list_comments blog %}
+    {% comment_form_for blog %}
 {% endblock %}

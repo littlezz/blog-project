@@ -21,6 +21,7 @@ from gallry import urls as gallry_urls
 from django.conf import settings
 from django.conf.urls.static import static
 from code_post import urls as code_urls
+from comment import urls as comment_urls
 
 urlpatterns = [
     url('^markdown/', include( 'django_markdown.urls')),
@@ -30,6 +31,7 @@ urlpatterns = [
     url(r'^code/', include(code_urls, namespace='code')),
     url(r'^$', TemplateView.as_view(template_name='welcome.html')),
     url(r'^images/', include(gallry_urls)),
+    url(r'^comments/', include(comment_urls)),
     # url(r'^ckeditor/', include('ckeditor.urls')),
     # url(r'^tinymce/', include('tinymce.urls')),
     url(r'^redactor/', include('redactor.urls')),

@@ -1,4 +1,6 @@
 from django.template import Library
+from comment.forms import CommentForm
+
 __author__ = 'zz'
 
 register = Library()
@@ -10,4 +12,11 @@ def list_comments(context, obj):
     return {
         'comments': queryset,
         'comments_count': count,
+    }
+
+@register.inclusion_tag('includes/comment_form.html', takes_context=True)
+def comment_form_for(context, obj):
+    form = CommentForm(obj)
+    return {
+        'form': form
     }
