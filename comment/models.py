@@ -5,6 +5,7 @@ from core.fields import MarkdownField
 from django.contrib.auth.models import Permission
 from core.models import TimeStamp
 from .managers import CommentManager
+from core.utils import markdown_render
 # Create your models here.
 
 
@@ -24,7 +25,7 @@ class Comment(TimeStamp, UserInfo):
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey()
-    content = MarkdownField()
+    content = models.TextField(max_length=5000)
     is_public = models.BooleanField(default=True)
 
     objects = CommentManager()
@@ -34,4 +35,7 @@ class Comment(TimeStamp, UserInfo):
         return '{}: {}'.format(self.username, self.content)
 
     def get_absolute_url(self):
-        return self.content_object.get_absolute_url() + '#comment{}'.format(self.id)
+        return self.content_object.get_absolute_url() + '#comment-{}'.format(self.id)
+
+    def render_content(self):
+        return markdown_render(self.content)
