@@ -23,3 +23,12 @@ Requirements
 - grappelli
 - django-wysiwyg-redactor
 - slugify
+
+TO DO
+------
+- 加上归档侧边栏（tags， 日期归档）
+
+
+完成
+----
+- 评论模块 2015年07月11日21:21:21
