@@ -141,10 +141,12 @@ class BaseBlogPost(Displayable, Slugged):
         }
         return reverse(self.name_space + ':' + 'blog_post_detail', kwargs=kwargs)
 
+
+    # 按照update_time倒序， 最新修改的已经在前面了。
     def get_next_object(self):
-        return self.__class__.objects.publish().filter(id__gt=self.id).first()
+        return self.__class__.objects.publish().filter(update_time__lt=self.update_time).first()
 
     def get_previous_object(self):
-        return self.__class__.objects.publish().filter(id__lt=self.id).last()
+        return self.__class__.objects.publish().filter(update_time__gt=self.update_time).last()
 
 
