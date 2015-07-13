@@ -21,7 +21,7 @@ class BlogPost(NameSpaceMixin, BaseBlogPost):
     content = MarkdownField()
     comments = GenericRelation(Comment)
 
-    class Meta:
+    class Meta(BaseBlogPost.Meta):
         verbose_name = 'post of code'
 
     def rendered_content(self):

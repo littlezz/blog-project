@@ -24,5 +24,5 @@ class BlogPost(NameSpaceMixin, BaseBlogPost):
     content = RichTextField()
     comments = GenericRelation(Comment)
 
-    class Meta:
+    class Meta(BaseBlogPost.Meta):
         verbose_name = 'post of blog'
