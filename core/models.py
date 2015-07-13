@@ -141,5 +141,10 @@ class BaseBlogPost(Displayable, Slugged):
         }
         return reverse(self.name_space + ':' + 'blog_post_detail', kwargs=kwargs)
 
+    def get_next_object(self):
+        return self.__class__.objects.publish().filter(id__gt=self.id).first()
+
+    def get_previous_object(self):
+        return self.__class__.objects.publish().filter(id__lt=self.id).last()
 
 

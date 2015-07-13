@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blogproject',
+    'core',
     'blog',
     'django_markdown',
     "bootstrap3",

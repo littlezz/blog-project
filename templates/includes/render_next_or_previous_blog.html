@@ -1,0 +1,15 @@
+<nav>
+    <ul class="pager">
+        {% if has_previous %}
+            <li class="previous"><a href="{{ previous_blog.get_absolute_url }}">
+                <span aria-hidden="true">&larr;</span> {{ previous_blog.title }}</a>
+            </li>
+        {% endif %}
+
+        {% if has_next %}
+            <li class="next"><a href="{{ next_blog.get_absolute_url }}">
+                {{ next_blog.title }} <span aria-hidden="true">&rarr;</span></a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>

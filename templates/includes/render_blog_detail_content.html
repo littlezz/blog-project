@@ -1,5 +1,5 @@
 {% extends 'includes/render_blog_list_content.html' %}
-{% load comment_tag %}
+{% load comment_tag blog_tag %}
 
 {% block feature_image_top %}
 
@@ -16,9 +16,11 @@
         {% lorem 10 p %}
     </div>
 
+    {% next_or_previous_blog blog %}
 {% endblock %}
 
 {% block comments %}
+
     {% list_comments blog %}
     {% comment_form_for blog %}
 {% endblock %}

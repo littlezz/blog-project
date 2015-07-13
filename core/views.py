@@ -30,7 +30,6 @@ class GetQuerysetMixin:
         if tag:
             queryset = queryset.filter(tags__slug=tag)
 
-        print(queryset)
         return queryset
 
 
