@@ -15,17 +15,20 @@
     {% lorem 3 p %}
 {% endblock %}
 {% block tags %}
-    {% with blog.tags.all as blog_tags %}
-    {% if blog_tags %}
-        Keywords:
-        {% for t in blog_tags %}
-            <span><a href="{{ t.get_absolute_url }}" class="tag"> {{ t }}</a> </span>
+    <div>
+        {% with blog.tags.all as blog_tags %}
+        {% if blog_tags %}
+            <span>Keywords:</span>
+            {% for t in blog_tags %}
+                <span><a href="{{ t.get_absolute_url }}" class="tag"> {{ t }}</a> </span>
 
-        {% endfor %}
-    {% endif %}
-    {% endwith %}
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
 {% endblock %}
 
-
+{% block next_and_previous_blog %}
+{% endblock %}
 {% block comments %}
 {% endblock %}
