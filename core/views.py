@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.views.generic import ListView, DetailView
+from django.views.generic.dates import YearArchiveView, MonthArchiveView
 
 
 class BaseGetContextMixin:
@@ -41,7 +42,25 @@ class BaseBlogListView(GetQuerysetMixin, ListView):
 
 
 
-
-
 class BaseBlogDetailView(GetQuerysetMixin, DetailView):
     context_object_name = 'blog'
+
+
+
+class _ArchiveMixin:
+    context_object_name = 'blog_list'
+    date_field = 'publish_date'
+    template_name_suffix = ''
+
+    def get_template_names(self):
+        return '{}/blog_list.html'.format(self.model._meta.app_label)
+
+
+
+class BaseYearArchive(_ArchiveMixin, YearArchiveView):
+    make_object_list = True
+
+
+class BaseMonthArchive(_ArchiveMixin, MonthArchiveView):
+    month_format='%m'
+
