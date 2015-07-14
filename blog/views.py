@@ -20,9 +20,9 @@ class BlogDetailView(GetContextMixin, BaseBlogDetailView):
     template_name = 'blog/blog_detail.html'
 
 
-class YearArchiveView(BaseYearArchive):
+class YearArchiveView(GetContextMixin, BaseYearArchive):
     model = BlogPost
 
 
-class MonthArchiveView(BaseMonthArchive):
+class MonthArchiveView(GetContextMixin, BaseMonthArchive):
     model =  BlogPost
