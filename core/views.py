@@ -6,14 +6,14 @@ from django.views.generic.dates import YearArchiveView, MonthArchiveView
 
 
 class BaseGetContextMixin:
-    category = None
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['categories'] = self.category.objects.all()
+        context['categories'] = self.model.category.get_queryset()
         context['category'] = self.kwargs.get('category_slug')
         context['tag'] = self.kwargs.get('tag')
         return context
+
 
 class GetQuerysetMixin:
     def get_queryset(self):
@@ -35,14 +35,14 @@ class GetQuerysetMixin:
 
 
 
-class BaseBlogListView(GetQuerysetMixin, ListView):
+class BaseBlogListView(BaseGetContextMixin, GetQuerysetMixin, ListView):
     context_object_name = 'blog_list'
     paginate_by = 5
 
 
 
 
-class BaseBlogDetailView(GetQuerysetMixin, DetailView):
+class BaseBlogDetailView(BaseGetContextMixin, GetQuerysetMixin, DetailView):
     context_object_name = 'blog'
 
 
@@ -57,10 +57,10 @@ class _ArchiveMixin:
 
 
 
-class BaseYearArchive(_ArchiveMixin, YearArchiveView):
+class BaseYearArchive(_ArchiveMixin, BaseGetContextMixin, YearArchiveView):
     make_object_list = True
 
 
-class BaseMonthArchive(_ArchiveMixin, MonthArchiveView):
-    month_format='%m'
+class BaseMonthArchive(_ArchiveMixin, BaseGetContextMixin, MonthArchiveView):
+    month_format = '%m'
 
