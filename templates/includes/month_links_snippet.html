@@ -5,6 +5,9 @@
     {% for year in years_list %}
         <li>
             <a href="{% simple_url 'year_archive' year.grouper %}">{{ year.grouper }}</a>
+
+            <div class="test-toggle">
+               toggle
             <ul>
                 {% for m in year.list %}
                     <li>
@@ -13,6 +16,7 @@
                 {% endfor %}
                 
             </ul>
+            </div>
         </li>
     {% endfor %}
 </ul>
