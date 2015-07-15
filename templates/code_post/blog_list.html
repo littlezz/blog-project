@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load bootstrap3 %}
+{% load bootstrap3 blog_tag %}
 
 {% block title %}
     {{ category|default_if_none:"blog list" }}
@@ -7,12 +7,7 @@
 
 {% block nav %}
 <div>
-{#    <p>#}
-{#        <span><a href="{% url 'blog:blog_list_all' %}">all</a> </span>#}
-{#        {% for c in categories %}#}
-{#            <span><a href="{{ c.get_absolute_url }}">{{ c }}</a> </span>#}
-{#        {% endfor %}#}
-{#    </p>#}
+
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -30,9 +25,9 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav text-center">
             {% if not category %}
-                <li class="active"><a href="{% url 'code:blog_list_all' %}">ALL<span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="{% simple_url 'blog_list_all' %}">ALL<span class="sr-only">(current)</span></a></li>
               {% else %}
-                <li><a href="{% url 'code:blog_list_all' %}">ALL</a></li>
+                <li><a href="{% simple_url 'blog_list_all' %}">ALL</a></li>
               {% endif %}
 
           {% for c in categories  %}

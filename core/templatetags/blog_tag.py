@@ -1,4 +1,5 @@
-from django.template import Library
+from django.core.urlresolvers import reverse
+from django.template import Library, defaulttags
 __author__ = 'zz'
 
 register = Library()
@@ -23,4 +24,25 @@ def next_or_previous_blog(context, obj):
         'previous_blog': previous_blog,
         'has_next': has_next,
         'has_previous': has_previous
+    }
+
+
+@register.simple_tag(takes_context=True)
+def simple_url(context, obj, **kwargs):
+    """
+    :param obj:  the url name same as the {% url %}
+    :return: if the is no ':' in the viewname, the function will add the current_ns from the context.
+    """
+    ns = context.get('current_ns')
+
+    if ns and (':' not in obj):
+        obj = ':'.join((ns, obj))
+
+    return reverse(obj, kwargs=kwargs)
+
+
+@register.inclusion_tag('includes/month_links_snippet.html')
+def month_links(model):
+    return {
+        'dates': model.objects.publish().datetimes('publish_date', 'month')
     }

@@ -7,7 +7,7 @@ from comment.models import Comment
 
 # Create your models here.
 class NameSpaceMixin:
-    name_space = 'code'
+    name_space = 'code_post'
 
 
 class Category(NameSpaceMixin, AbstractCategory):

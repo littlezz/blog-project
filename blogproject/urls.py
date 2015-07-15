@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^blog/', include(blog_urls, namespace='blog')),
-    url(r'^code/', include(code_urls, namespace='code')),
+    url(r'^code/', include(code_urls, namespace='code_post')),
     url(r'^$', TemplateView.as_view(template_name='welcome.html')),
     url(r'^images/', include(gallry_urls)),
     url(r'^comments/', include(comment_urls)),

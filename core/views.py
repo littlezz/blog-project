@@ -9,9 +9,12 @@ class BaseGetContextMixin:
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         context['categories'] = self.model.category.get_queryset()
         context['category'] = self.kwargs.get('category_slug')
         context['tag'] = self.kwargs.get('tag')
+        context['model'] = self.model
+        context['current_ns'] = self.model._meta.app_label
         return context
 
 
