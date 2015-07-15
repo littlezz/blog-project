@@ -52,3 +52,27 @@ def month_links(context):
 
     })
     return context
+
+
+@register.inclusion_tag('includes/filter_info.html', takes_context=True)
+def filter_info(context):
+    tag = context.get('tag')
+    category = context.get('category')
+    year = context.get('year')
+    month = context.get('month')
+
+    if year:
+        year = year.strftime('%Y')
+
+    if month:
+        month = month.strftime('%Y-%m')
+
+    ret = {
+        'tag': tag,
+        'category': category,
+        'year': year,
+        'month': month
+    }
+
+    ret['has_filter'] = any(ret.values())
+    return ret
