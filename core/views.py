@@ -62,8 +62,9 @@ class _ArchiveMixin:
 
 class BaseYearArchive(_ArchiveMixin, BaseGetContextMixin, YearArchiveView):
     make_object_list = True
+    paginate_by = 5
 
 
 class BaseMonthArchive(_ArchiveMixin, BaseGetContextMixin, MonthArchiveView):
     month_format = '%m'
-
+    paginate_by = 5

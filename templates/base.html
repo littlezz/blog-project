@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load staticfiles blog_tag%}
 
 <!DOCTYPE html>
 <html>
@@ -43,7 +43,7 @@
 <footer>
 
     {% block foot_panel %}
-{#        TODO #}
+        {% month_links %}
     {% endblock %}
 </footer>
 </html>

@@ -28,7 +28,7 @@ def next_or_previous_blog(context, obj):
 
 
 @register.simple_tag(takes_context=True)
-def simple_url(context, obj, **kwargs):
+def simple_url(context, obj, *args, **kwargs):
     """
     :param obj:  the url name same as the {% url %}
     :return: if the is no ':' in the viewname, the function will add the current_ns from the context.
@@ -38,11 +38,17 @@ def simple_url(context, obj, **kwargs):
     if ns and (':' not in obj):
         obj = ':'.join((ns, obj))
 
-    return reverse(obj, kwargs=kwargs)
+    return reverse(obj, args=args, kwargs=kwargs)
 
 
-@register.inclusion_tag('includes/month_links_snippet.html')
-def month_links(model):
-    return {
+@register.inclusion_tag('includes/month_links_snippet.html', takes_context=True)
+def month_links(context):
+    model = context.get('model')
+    if not model:
+        return None
+
+    context.update({
         'dates': model.objects.publish().datetimes('publish_date', 'month')
-    }
+
+    })
+    return context

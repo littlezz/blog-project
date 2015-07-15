@@ -1,9 +1,18 @@
+{% load blog_tag %}
 {% regroup dates by year as years_list %}
 
 <ul>
     {% for year in years_list %}
         <li>
-            <a href=""></a>
+            <a href="{% simple_url 'year_archive' year.grouper %}">{{ year.grouper }}</a>
+            <ul>
+                {% for m in year.list %}
+                    <li>
+                        <a href="{% simple_url 'month_archive' year.grouper m.month %}">{{ m|date:'F' }}</a>
+                    </li>
+                {% endfor %}
+                
+            </ul>
         </li>
     {% endfor %}
 </ul>
