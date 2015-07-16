@@ -13,7 +13,7 @@ class CommentAdmin(ViewOnSiteMixin, admin.ModelAdmin):
 
     fieldsets = (
         ('',{
-           'fields':('username', 'email', 'website'),
+           'fields':('username', 'email', 'website', 'ip_address'),
         }),
         ('comment', {
             'fields': ('content', 'is_public', 'create_time'),

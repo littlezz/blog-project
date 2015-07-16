@@ -1,11 +1,11 @@
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
-from core.fields import MarkdownField
 from django.contrib.auth.models import Permission
 from core.models import TimeStamp
 from .managers import CommentManager
 from core.utils import markdown_render
+from django.utils.timezone import now
 # Create your models here.
 
 

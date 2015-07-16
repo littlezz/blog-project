@@ -1,6 +1,6 @@
 from django import forms
 from .models import Comment
-from django.template.defaulttags import mark_safe
+from django.utils.timezone import now
 __author__ = 'zz'
 
 
@@ -18,7 +18,6 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ('username', 'email', 'website', 'content')
         help_texts = {
-            '': 'ggsmd',
             'username': '*',
             'content': '*',
         }
@@ -34,11 +33,31 @@ class CommentForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
     def save(self, commit=True):
+
         comment = super().save(commit=False)
         comment.content_object = self.target_object
+
+        old = self.check_duplicate(comment)
+        if old:
+            return old
+
         if commit:
             comment.save()
         return comment
+
+    def check_duplicate(self, new):
+        possible_dup = self.Meta.model.objects.filter(
+            username=new.username,
+            content_type=new.content_type,
+            object_id=new.object_id,
+            email=new.email,
+            website=new.website,
+        )
+        print(new.create_time)
+        for old in possible_dup:
+            if old.create_time.date() == now().date() and old.content == new.content:
+                return old
+
 
 
 
