@@ -5,8 +5,6 @@ from django.contrib.auth.models import Permission
 from core.models import TimeStamp
 from .managers import CommentManager
 from core.utils import markdown_render
-from django.utils.timezone import now
-# Create your models here.
 
 
 class UserInfo(models.Model):

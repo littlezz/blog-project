@@ -52,11 +52,9 @@
     {% block content %}
         {% filter_info %}
         {% for blog in blog_list %}
-            <div class="list-background" style="background-image: {% if blog.feature_image %}
-                url({{ blog.feature_image.url }})
-            {% endif %}" >
+
                 {% include 'includes/render_blog_list_content.html' %}
-            </div>
+
             {% if not forloop.last %}
                 <hr>
             {% endif %}
